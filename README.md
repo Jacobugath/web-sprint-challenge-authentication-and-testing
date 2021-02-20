@@ -74,6 +74,9 @@ Submit via Codegrade. Remember to add a query string to your Webhook's Payload U
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics.
 
 1. Differences between using _sessions_ or _JSON Web Tokens_ for authentication.
+JSON web tokens have cryptographic signatures, and that’s not the case with session cookies.
 2. What does `bcryptjs` do to help us store passwords in a secure manner?
+It hashes them.
 3. How are unit tests different from integration and end-to-end testing?
-4. How does _Test Driven Development_ change the way we write applications and tests?
+Units should be tested in isolation and independent of other units. This is typically achieved by mocking the dependencies. End to end testing involves testing an application's workflow from beginning to end.
+4. How does _Test Driven Development_ change the way we write applications and tests? You write the tests before writing the code it will test.

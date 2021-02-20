@@ -10,13 +10,6 @@ const {
     insert,
 } = require('./auth-model');
 
-router.get('/', (req, res) =>{
-  res.send({message: 'up'})
-});
-router.post('/', (req, res) =>{
-  res.send({message: 'up'})
-});
-
 router.post('/register', (req, res) => {
   if (!req.body.password||!req.body.username){
     res.status(401).send({message: 'username and password required'})
@@ -75,7 +68,7 @@ router.post('/login', (req, res) => {
         res.status(401).send({message: 'invalid credentials'})
     }
 })
-.catch(err => {  
+.catch(err => {
     res.status(401).send({message: 'invalid credentials'})
     console.log("error in post",err);
 

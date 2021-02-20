@@ -24,7 +24,8 @@ describe('server.js', () => {
   describe('login route', () => {
     it('should return a 401 status code when invalid.', async () => {
       const expectedStatusCode = 401;
-      const response = await request(server).post('/api/auth/login', {username: 'dude', password: '1'});
+      const response = await request(server).post('/api/auth/login')
+      .send({username: 'dude', password: '1'})
       expect(response.status).toEqual(expectedStatusCode);
     });
     it('Should return expected message when login is invalid', async () => {
@@ -35,16 +36,27 @@ describe('server.js', () => {
     });
   });
   describe('register route', () => {
-    it('should return a 401 status code when invalid.', async () => {
+    it('should return a 401 status code when needed info is missing.', async () => {
       const expectedStatusCode = 401;
-      const response = await request(server).post('/api/auth/login', {username: 'dude', password: '1'});
+      const response = await request(server).post('/api/auth/register');
       expect(response.status).toEqual(expectedStatusCode);
     });
-    it('Should return expected message when login is invalid', async () => {
+    it('Should return expected message when needed info is missing', async () => {
       const expectedStatusCode = 401;
-      const response = await request(server).post('/api/auth/login')
-      .send({username: 'dude', password: '1'})
-      expect(response.body).toEqual({message:'invalid credentials'});
+      const response = await request(server).post('/api/auth/register')
+      expect(response.body).toEqual({message: 'username and password required'});
+    });
+  });
+  describe('jokes route', () => {
+    it('should return a 401 status code when token is missing.', async () => {
+      const expectedStatusCode = 401;
+      const response = await request(server).get('/api/jokes');
+      expect(response.status).toEqual(expectedStatusCode);
+    });
+    it('Should return expected message when token is missing', async () => {
+      const expectedStatusCode = 401;
+      const response = await request(server).post('/api/jokes')
+      expect(response.body).toEqual({message: 'token required'});
     });
   });
 });
